@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  name: scitokens
+  version: 1.9.7
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/scitokens-${{ version }}.tar.gz
+  sha256: 9aabefbd68859e94a3909f3dc08bd73c0e7a9c08203c16de338c9512ace821e3
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - scitokens-admin-create-key = scitokens.tools.admin_create_key:main
+      - scitokens-admin-create-token = scitokens.tools.admin_create_token:main
+      - scitokens-verify-token = scitokens.tools.verify_token:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - cryptography
+    - pyjwt >=1.6.1
+    - python >=${{ python_min }}
+    - requests
+
+tests:
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - pip
+        - pytest
+        - python ${{ python_min }}.*
+    script:
+      # Check metadata
+      - python -m pip check
+      - python -m pip show scitokens
+      # Run test suite
+      - python -m pytest -ra -v tests/
+      # Check entry points
+      - scitokens-admin-create-key --help
+      - scitokens-admin-create-token --help
+      - scitokens-verify-token --help
+
+about:
+  summary: SciToken reference implementation library
+  description: |
+    This library aims to be a reference implementation of the
+    SciTokens\' JSON Web Token (JWT) token format.
+
+    SciTokens is built on top of the PyJWT and cryptography libraries.
+    We aim to provide a safe, high-level interface for token manipulation,
+    avoiding common pitfalls of using the underling libraries directly.
+  homepage: https://scitokens.org
+  repository: https://github.com/scitokens/scitokens.git
+  documentation: https://scitokens.readthedocs.io
+  license: Apache-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - duncanmmacleod
