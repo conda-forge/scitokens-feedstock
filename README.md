@@ -3,7 +3,7 @@ About scitokens-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/scitokens-feedstock/blob/main/LICENSE.txt)
 
-Home: https://scitokens.org
+Home: https://scitokens.org/
 
 Package license: Apache-2.0
 
@@ -11,7 +11,7 @@ Summary: SciToken reference implementation library
 
 Development: https://github.com/scitokens/scitokens.git
 
-Documentation: https://scitokens.readthedocs.io
+Documentation: https://scitokens.readthedocs.io/
 
 This library aims to be a reference implementation of the
 SciTokens\' JSON Web Token (JWT) token format.
@@ -19,7 +19,6 @@ SciTokens\' JSON Web Token (JWT) token format.
 SciTokens is built on top of the PyJWT and cryptography libraries.
 We aim to provide a safe, high-level interface for token manipulation,
 avoiding common pitfalls of using the underling libraries directly.
-
 
 Current build status
 ====================
